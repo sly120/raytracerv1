@@ -6,7 +6,7 @@
 /*   By: sly <sly@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 20:47:09 by sly               #+#    #+#             */
-/*   Updated: 2016/11/28 21:44:40 by sly              ###   ########.fr       */
+/*   Updated: 2016/12/01 23:31:55 by sly              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,43 @@
 
 static void		raytracing_part1(t_param *p)
 {
-	
+	p->vplaneupleft.x = p->campos.x + p->camvec.x * p->campl.dist + p->upvect.x * p->campl.height / 2.0 + p->leftvect.x * p->campl.width / 2.0;
+	p->vplaneupleft.y = p->campos.y + p->camvec.y * p->campl.dist + p->upvect.y * p->campl.height / 2.0 + p->leftvect.y * p->campl.width / 2.0;
+	p->vplaneupleft.z = p->campos.z + p->camvec.z * p->campl.dist + p->upvect.z * p->campl.height / 2.0 + p->leftvect.z * p->campl.width / 2.0;
+	p->rayvect.x = p->vplaneupleft.x - p->x * p->leftvect.x * p->campl.width / (double)MAX_X - p->y * p->upvect.x * p->campl.height / (double)MAX_Y;
+	p->rayvect.y = p->vplaneupleft.y - p->x * p->leftvect.y * p->campl.width / (double)MAX_X - p->y * p->upvect.y * p->campl.height / (double)MAX_Y;
+	p->rayvect.z = p->vplaneupleft.z - p->x * p->leftvect.z * p->campl.width / (double)MAX_X - p->y * p->upvect.z * p->campl.height / (double)MAX_Y;
+	p->rayvectnorm = sqrt(p->rayvect.x * p->rayvect.x + p->rayvect.y * p->rayvect.y + p->rayvect.z * p->rayvect.z);
+	p->rayvect.x /= p->rayvectnorm;
+	p->rayvect.y /= p->rayvectnorm;
+	p->rayvect.z /= p->rayvectnorm;
+}
+
+static void		raytracing_part2(t_param *p)
+{
+	p->s1.a = p->rayvect.x * p->rayvect.x + p->rayvect.y * p->rayvect.y + p->rayvect.z * p->rayvect.z;
+	p->s1.b = 2 * (p->rayvect.x * (p->campos.x - p->s1.origin.x) + p->rayvect.y * (p->campos.y - p->s1.origin.y) + p->rayvect.z * (p->campos.z - p->s1.origin.z));
+	p->s1.c = (p->campos.x - p->s1.origin.x) * (p->campos.x - p->s1.origin.x) + (p->campos.y - p->s1.origin.y) * (p->campos.y - p->s1.origin.y) + (p->campos.z - p->s1.origin.z) * (p->campos.z - p->s1.origin.z) - p->s1.radius * p->s1.radius;
+	p->s1.det = p->s1.b * p->s1.b - 4 * p->s1.a * p->s1.c;
+	if (p->s1.det >= 0)
+	{
+		p->s1.t1 = - (p->s1.b - sqrt(p->s1.det)) / 2 / p->s1.a;
+		p->s1.t2 = - (p->s1.b + sqrt(p->s1.det)) / 2 / p->s1.a;
+	}
 }
 
 void			raytracing(t_param *p)
 {
 	while (p->x < MAX_X)
 	{
-		raytracing_part1(p);
-		x++;
+		while (p->y < MAX_Y)
+		{
+			raytracing_part1(p);
+			raytracing_part2(p);
+			p->y++;
+		}
+		p->x++;
+		p->y = 0;
 	}
+	p->x = 0;
 }
