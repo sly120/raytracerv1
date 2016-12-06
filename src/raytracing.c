@@ -6,7 +6,7 @@
 /*   By: sly <sly@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 20:47:09 by sly               #+#    #+#             */
-/*   Updated: 2016/12/01 23:31:55 by sly              ###   ########.fr       */
+/*   Updated: 2016/12/06 22:11:44 by sly              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,15 +28,16 @@ static void		raytracing_part1(t_param *p)
 
 static void		raytracing_part2(t_param *p)
 {
-	p->s1.a = p->rayvect.x * p->rayvect.x + p->rayvect.y * p->rayvect.y + p->rayvect.z * p->rayvect.z;
-	p->s1.b = 2 * (p->rayvect.x * (p->campos.x - p->s1.origin.x) + p->rayvect.y * (p->campos.y - p->s1.origin.y) + p->rayvect.z * (p->campos.z - p->s1.origin.z));
-	p->s1.c = (p->campos.x - p->s1.origin.x) * (p->campos.x - p->s1.origin.x) + (p->campos.y - p->s1.origin.y) * (p->campos.y - p->s1.origin.y) + (p->campos.z - p->s1.origin.z) * (p->campos.z - p->s1.origin.z) - p->s1.radius * p->s1.radius;
-	p->s1.det = p->s1.b * p->s1.b - 4 * p->s1.a * p->s1.c;
-	if (p->s1.det >= 0)
+	p->sph.a = p->rayvect.x * p->rayvect.x + p->rayvect.y * p->rayvect.y + p->rayvect.z * p->rayvect.z;
+	p->sph.b = 2 * p->rayvect.x * p->campos.x - 2 * p->rayvect.x * p->sph.origin.x + 2 * p->rayvect.y * p->campos.y - 2 * p->rayvect.y * p->sph.origin.y + 2 * p->rayvect.z * p->campos.z - 2 * p->rayvect.z * p->sph.origin.z;
+	p->sph.c = p->campos.x * p->campos.x - 2 * p->campos.x * p->sph.origin.x + p->sph.origin.x * p->sph.origin.x + p->campos.y * p->campos.y - 2 * p->campos.y * p->sph.origin.y + p->sph.origin.y * p->sph.origin.y + p->campos.z * p->campos.z - 2 * p->campos.z * p->sph.origin.z + p->sph.origin.z * p->sph.origin.z - p->sph.radius * p->sph.radius;
+	p->sph.det = p->sph.b * p->sph.b - 4 * p->sph.a * p->sph.c;
+	if (p->sph.det >= 0)
 	{
-		p->s1.t1 = - (p->s1.b - sqrt(p->s1.det)) / 2 / p->s1.a;
-		p->s1.t2 = - (p->s1.b + sqrt(p->s1.det)) / 2 / p->s1.a;
+		p->sph.t1 = -p->sph.b / 2 / p->sph.a - sqrt(p->sph.det) / 2 / p->sph.a;
+		p->sph.t2 = -p->sph.b / 2 / p->sph.a + sqrt(p->sph.det) / 2 / p->sph.a;
 	}
+
 }
 
 void			raytracing(t_param *p)
