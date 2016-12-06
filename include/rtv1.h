@@ -6,7 +6,7 @@
 /*   By: sly <sly@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/21 19:38:43 by sly               #+#    #+#             */
-/*   Updated: 2016/12/06 21:42:39 by sly              ###   ########.fr       */
+/*   Updated: 2016/12/06 23:07:12 by sly              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ typedef struct			s_sphere
 	double				det;
 	double				t1;
 	double				t2;
+	double				t;
 }						t_sphere;
 
 typedef struct			s_param
@@ -82,4 +83,6 @@ typedef struct			s_param
 
 void					init(char *arg, t_param *p);
 void					raytracing(t_param *p);
+void					display_cache(t_param *p);
+void					hook(t_param *p);
 #	endif

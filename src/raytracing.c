@@ -6,7 +6,7 @@
 /*   By: sly <sly@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 20:47:09 by sly               #+#    #+#             */
-/*   Updated: 2016/12/06 22:11:44 by sly              ###   ########.fr       */
+/*   Updated: 2016/12/06 23:14:46 by sly              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,10 @@ static void		raytracing_part2(t_param *p)
 	{
 		p->sph.t1 = -p->sph.b / 2 / p->sph.a - sqrt(p->sph.det) / 2 / p->sph.a;
 		p->sph.t2 = -p->sph.b / 2 / p->sph.a + sqrt(p->sph.det) / 2 / p->sph.a;
+		p->sph.t = (p->sph.t1 <= p->sph.t2) ? p->sph.t1 : p->sph.t2;
 	}
-
+	else
+		p->sph.t = -1;
 }
 
 void			raytracing(t_param *p)
@@ -48,10 +50,12 @@ void			raytracing(t_param *p)
 		{
 			raytracing_part1(p);
 			raytracing_part2(p);
+			display_cache(p);
 			p->y++;
 		}
 		p->x++;
 		p->y = 0;
 	}
 	p->x = 0;
+	hook(p);
 }
