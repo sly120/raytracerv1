@@ -6,7 +6,7 @@
 /*   By: sly <sly@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/21 19:35:59 by sly               #+#    #+#             */
-/*   Updated: 2016/11/28 20:39:39 by sly              ###   ########.fr       */
+/*   Updated: 2016/12/09 21:40:40 by sly              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,11 @@ int				main(int argc, char **argv)
 {
 	t_param		p;
 
-	if (argc == 2)
-	{
+//	if (argc == 2)
+//	{
 		mlx_initialization(&p);
 		init(argv[1], &p);
 		raytracing(&p);
-	}
+//	}
 	return (0);
 }
