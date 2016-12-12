@@ -6,7 +6,7 @@
 /*   By: sly <sly@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/21 19:38:43 by sly               #+#    #+#             */
-/*   Updated: 2016/12/06 23:07:12 by sly              ###   ########.fr       */
+/*   Updated: 2016/12/12 22:34:16 by sly              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,10 @@
 #include <math.h>
 #include "../minilibx_macos/mlx.h"
 #include <libft.h>
+#include <float.h>
 
-#define MAX_X 500
-#define MAX_Y 500
+#define MAX_X 1000
+#define MAX_Y 1000
 
 #define KEY_ARROW_UP 126
 #define KEY_ARROW_DOWN 125
@@ -32,12 +33,12 @@
 #define KEY_SPACE 49
 #define KEY_ENTER 36
 
-typedef struct			s_camplane
+typedef struct			s_screen
 {
 	double				width;
 	double				height;
 	double				dist;
-}						t_camplane;
+}						t_screen;
 
 typedef struct			s_vector
 {
@@ -48,7 +49,7 @@ typedef struct			s_vector
 
 typedef struct			s_sphere
 {
-	t_vector			origin;
+	t_vector			pos;
 	double				radius;
 	double				a;
 	double				b;
@@ -56,8 +57,32 @@ typedef struct			s_sphere
 	double				det;
 	double				t1;
 	double				t2;
-	double				t;
 }						t_sphere;
+
+typedef struct			s_object
+{
+	char				id;
+	char				type;
+	int					ambient;
+	int					diffuse;
+	int					specular;
+	int					selfillum;
+	double				shininess;
+	double				shinestrength;
+	double				transmittivity;
+	double				reflectivity;
+	char				permanent;
+	double				t;
+	t_sphere			sph;
+	struct s_object		*next;
+}						t_object;
+
+typedef struct			s_light
+{
+	char				id;
+	int					color;
+	t_vector			pos;
+}						t_light;
 
 typedef struct			s_param
 {
@@ -68,9 +93,9 @@ typedef struct			s_param
 	int					bpp;
 	int					sl;
 	int					endian;
-	t_camplane			campl;
+	t_screen			screen;
 	t_vector			campos;
-	t_vector			camvec;
+	t_vector			screen_vec;
 	int					x;
 	int					y;
 	t_vector			vplaneupleft;
@@ -78,11 +103,17 @@ typedef struct			s_param
 	t_vector			leftvect;
 	t_vector			rayvect;
 	double				rayvectnorm;
-	t_sphere			sph;
+	t_object			obj;
+	t_light				light;
 }						t_param;
 
 void					init(char *arg, t_param *p);
+t_vector				vector_scalar_mult(t_vector vect, double scalar);
+t_vector				vector_vector_add(t_vector v1, t_vector v2);
+t_vector				vector_vector_sub(t_vector v1, t_vector v2);
 void					raytracing(t_param *p);
-void					display_cache(t_param *p);
+void					display_cache(int firstobjid, t_param *p);
 void					hook(t_param *p);
+int						key_event(int key, t_param *p);
+int						quit_program(t_param *p);
 #	endif

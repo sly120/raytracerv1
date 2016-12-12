@@ -1,0 +1,15 @@
+a = DIR.x^2 + DIR.y^2 + DIR.z^2
+b = 2 * (DIR.x * (O.x - Xc) + DIR.y * (O.y - Yc) + DIR.z * (O.z - Zc))
+c = ((O.x - Xc)^2 + (O.y - Yc)^2 + (O.z - Zc)^2) - r^2
+
+b = 2 * (DIR.x * (O.x - Xc) + DIR.y * (O.y - Yc) + DIR.z * (O.z - Zc))
+b = 2 * (DIR.x * O.x - DIR.x * Xc + DIR.y * O.y - DIR.y * Yc + DIR.z * O.z - DIR.z * Zc)
+b = 2 * DIR.x * O.x - 2 * DIR.x * Xc + 2 * DIR.y * O.y - 2 * DIR.y * Yc + 2 * DIR.z * O.z - 2 * DIR.z * Zc
+
+c = ((O.x - Xc)^2 + (O.y - Yc)^2 + (O.z - Zc)^2) - r^2
+c = (O.x - Xc)^2 + (O.y - Yc)^2 + (O.z - Zc)^2 - r^2
+c = O.x * O.x - 2 * O.x * Xc + Xc * Xc + O.y * O.y - 2 * O.y * Yc + Yc * Yc + O.z * O.z - 2 * O.z * Zc + Zc * Zc - r^2
+
+(X - Xc)^2 + (Y - Yc)^2 + (Z - Zc)^2 = r^2
+(O.x + DIR.x * t - Xc)^2 + (O.y + DIR.y * t - Yc)^2 + (O.z + DIR.z * t - Zc)^2 = r^2
+(O.x + DIR.x * t)^2 + (O.y + DIR.y * t)^2 + (O.z + DIR.z * t)^2 = r^2
