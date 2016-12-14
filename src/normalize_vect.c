@@ -1,28 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   display_cache.c                                    :+:      :+:    :+:   */
+/*   normalize_vect.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sly <sly@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/12/06 22:57:41 by sly               #+#    #+#             */
-/*   Updated: 2016/12/14 21:52:40 by sly              ###   ########.fr       */
+/*   Created: 2016/12/14 18:14:17 by sly               #+#    #+#             */
+/*   Updated: 2016/12/14 18:21:30 by sly              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <rtv1.h>
 
-void			display_cache(int firstobjid, t_param *p)
+static t_vector	vector_scalar_divide(t_vector vect, double scalar)
 {
-	int			color;
-	t_vector	pos;
+	vect.x /= scalar;
+	vect.y /= scalar;
+	vect.z /= scalar;
+	return (vect);
+}
 
-	pos = vector_vector_add(p->campos, vector_scalar_mult(p->rayvect, p->obj.t));
-	color = 0;
-/*	if (p->obj.t >= 0)
-		color = p->obj.ambient;
-*/	color += light_calc(pos, p);
-	p->imgad[p->sl * p->y + 4 * p->x] = color;
-	p->imgad[p->sl * p->y + 4 * p->x + 1] = color >> 8;
-	p->imgad[p->sl * p->y + 4 * p->x + 2] = color >> 16;
+t_vector		normalize_vect(t_vector vect)
+{
+	double		vectlen;
+
+	vectlen = sqrt(vect.x * vect.x + vect.y * vect.y + vect.z * vect.z);
+	return (vector_scalar_divide(vect, vectlen));
 }

@@ -6,7 +6,7 @@
 /*   By: sly <sly@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/21 19:38:43 by sly               #+#    #+#             */
-/*   Updated: 2016/12/12 22:34:16 by sly              ###   ########.fr       */
+/*   Updated: 2016/12/14 21:41:25 by sly              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ typedef struct			s_sphere
 typedef struct			s_object
 {
 	char				id;
+	char				*name;
 	char				type;
 	int					ambient;
 	int					diffuse;
@@ -80,6 +81,7 @@ typedef struct			s_object
 typedef struct			s_light
 {
 	char				id;
+	double				selfillum;
 	int					color;
 	t_vector			pos;
 }						t_light;
@@ -102,7 +104,6 @@ typedef struct			s_param
 	t_vector			upvect;
 	t_vector			leftvect;
 	t_vector			rayvect;
-	double				rayvectnorm;
 	t_object			obj;
 	t_light				light;
 }						t_param;
@@ -112,6 +113,8 @@ t_vector				vector_scalar_mult(t_vector vect, double scalar);
 t_vector				vector_vector_add(t_vector v1, t_vector v2);
 t_vector				vector_vector_sub(t_vector v1, t_vector v2);
 void					raytracing(t_param *p);
+t_vector				normalize_vect(t_vector vect);
+int						light_calc(t_vector pos, t_param *p);
 void					display_cache(int firstobjid, t_param *p);
 void					hook(t_param *p);
 int						key_event(int key, t_param *p);

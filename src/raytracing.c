@@ -6,7 +6,7 @@
 /*   By: sly <sly@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 20:47:09 by sly               #+#    #+#             */
-/*   Updated: 2016/12/12 21:41:54 by sly              ###   ########.fr       */
+/*   Updated: 2016/12/14 18:22:46 by sly              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,12 @@ static void		raytracing_part1(t_param *p)
 	p->vplaneupleft.z = p->campos.z + p->screen_vec.z * p->screen.dist + p->upvect.z * p->screen.height / 2.0 + p->leftvect.z * p->screen.width / 2.0;
 	p->vplaneupleft = vector_vector_add(vector_vector_add(vector_scalar_mult(p->screen_vec, p->screen.dist), vector_scalar_mult(p->upvect, p->screen.height / 2)), vector_scalar_mult(p->leftvect, p->screen.width / 2));
 	p->rayvect = vector_vector_sub(vector_vector_sub(p->vplaneupleft, vector_scalar_mult(p->leftvect, p->screen.width / MAX_X * p->x)), vector_scalar_mult(p->upvect, p->screen.height / MAX_Y * p->y));
-	p->rayvectnorm = sqrt(p->rayvect.x * p->rayvect.x + p->rayvect.y * p->rayvect.y + p->rayvect.z * p->rayvect.z);
+/*	p->rayvectnorm = sqrt(p->rayvect.x * p->rayvect.x + p->rayvect.y * p->rayvect.y + p->rayvect.z * p->rayvect.z);
 	p->rayvect.x /= p->rayvectnorm;
 	p->rayvect.y /= p->rayvectnorm;
 	p->rayvect.z /= p->rayvectnorm;
+*/
+	p->rayvect = normalize_vect(p->rayvect);
 }
 
 static void		sphere_calc(t_param *p)
