@@ -6,7 +6,7 @@
 /*   By: sly <sly@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/14 17:44:32 by sly               #+#    #+#             */
-/*   Updated: 2016/12/14 23:45:17 by sly              ###   ########.fr       */
+/*   Updated: 2016/12/15 15:32:11 by sly              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,26 @@ int				light_calc(t_vector pos, t_param *p)
 	t_vector	lightvect;
 	t_vector	normal;
 	double		diff_ang;
+	char		r;
+	char		g;
+	char		b;
 	int			color;
 
-	lightvect = vector_vector_sub(pos, p->light.pos);
-	lightvect = normalize_vect(lightvect);
-	diff_ang = acos(lightvect.x * pos.x + lightvect.y * pos.y + lightvect.z * pos.z);
+	color = 0;
+	lightvect = normalize_vect(vector_vector_sub(p->light.pos, pos));
+	normal = normalize_vect(vector_vector_sub(pos, p->obj.sph.pos));
+	diff_ang = lightvect.x * normal.x + lightvect.y * normal.y + lightvect.z * normal.z;
 	if (diff_ang > 0)
-		color = p->obj.diffuse * p->light.color * p->light.selfillum * diff_ang;
-	else
-		color = p->obj.ambient;
+	{
+		//color = p->obj.diffuse * p->light.color * p->light.selfillum * diff_ang;
+		r = 255 * diff_ang;
+		g = 255 * diff_ang;
+		b = 255 * diff_ang;
+		color = r;
+		color = color << 8;
+		color += g;
+		color = color << 8;
+		color += b;
+	}
 	return (color);
 }
