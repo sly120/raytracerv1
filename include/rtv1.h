@@ -6,7 +6,7 @@
 /*   By: sly <sly@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/21 19:38:43 by sly               #+#    #+#             */
-/*   Updated: 2016/12/15 14:46:06 by sly              ###   ########.fr       */
+/*   Updated: 2016/12/16 18:05:54 by sly              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,13 @@ typedef struct			s_light
 	int					color;
 	t_vector			pos;
 }						t_light;
+
+typedef struct			s_color
+{
+	double				r;
+	double				g;
+	double				b;
+}						t_color;
 
 typedef struct			s_param
 {
