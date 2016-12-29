@@ -6,7 +6,7 @@
 /*   By: sly <sly@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/14 17:44:32 by sly               #+#    #+#             */
-/*   Updated: 2016/12/16 18:08:06 by sly              ###   ########.fr       */
+/*   Updated: 2016/12/29 21:51:48 by sly              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int				light_calc(t_vector pos, t_param *p)
 	int			color;
 
 	color = 0;
-	lightvect = normalize_vect(vector_vector_sub(p->light.pos, pos));
+/*	lightvect = normalize_vect(vector_vector_sub(p->light.pos, pos));
 	normal = normalize_vect(vector_vector_sub(pos, p->obj.sph.pos));
 	diff_ang = lightvect.x * normal.x + lightvect.y * normal.y + lightvect.z * normal.z;
 	if (diff_ang > 0)
@@ -32,5 +32,5 @@ int				light_calc(t_vector pos, t_param *p)
 //		printf("%d\n", (p->light.color >> 16) & 0xFF);
 		color = (((char)(c.r * 255) & 0xFF) << 16) | (((char)(c.g * 255) & 0xFF) << 8) | ((char)(c.b * 255) & 0xFF);
 	}
-	return (color);
+*/	return (color);
 }

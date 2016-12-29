@@ -6,25 +6,25 @@
 /*   By: sly <sly@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 20:47:09 by sly               #+#    #+#             */
-/*   Updated: 2016/12/15 14:51:56 by sly              ###   ########.fr       */
+/*   Updated: 2016/12/29 21:52:50 by sly              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <rtv1.h>
 
-static void		raytracing_part1(t_param *p)
+/*static void		raytracing_part1(t_param *p)
 {
 	t_vector	screenpos;
 
 	p->vplaneupleft = vector_vector_add(p->campos, vector_vector_add(vector_vector_add(vector_scalar_mult(p->screen_vec, p->screen.dist), vector_scalar_mult(p->upvect, p->screen.height / 2)), vector_scalar_mult(p->leftvect, p->screen.width / 2)));
 	screenpos = vector_vector_sub(vector_vector_sub(p->vplaneupleft, vector_scalar_mult(p->leftvect, p->screen.width / MAX_X * p->x)), vector_scalar_mult(p->upvect, p->screen.height / MAX_Y * p->y));
 	p->rayvect = vector_vector_sub(screenpos, p->campos);
-/*	p->rayvectnorm = sqrt(p->rayvect.x * p->rayvect.x + p->rayvect.y * p->rayvect.y + p->rayvect.z * p->rayvect.z);
+*//*	p->rayvectnorm = sqrt(p->rayvect.x * p->rayvect.x + p->rayvect.y * p->rayvect.y + p->rayvect.z * p->rayvect.z);
 	p->rayvect.x /= p->rayvectnorm;
 	p->rayvect.y /= p->rayvectnorm;
 	p->rayvect.z /= p->rayvectnorm;
 */
-	p->rayvect = normalize_vect(p->rayvect);
+/*	p->rayvect = normalize_vect(p->rayvect);
 }
 
 static void		sphere_calc(t_param *p)
@@ -61,10 +61,10 @@ static void		raytracing_part2(t_param *p)
 	if (firstobjid > -1)
 		display_cache(firstobjid, p);
 }
-
+*/
 void			raytracing(t_param *p)
 {
-	while (p->x < MAX_X)
+/*	while (p->x < MAX_X)
 	{
 		while (p->y < MAX_Y)
 		{
@@ -78,4 +78,4 @@ void			raytracing(t_param *p)
 	p->x = 0;
 //	printf("rayvect: %f, vplaneupleft: %f\n", p->rayvect.x, p->vplaneupleft.x);
 	hook(p);
-}
+*/}
