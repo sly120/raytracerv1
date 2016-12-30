@@ -6,7 +6,7 @@
 #    By: sly <sly@student.42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/21 18:35:31 by sly               #+#    #+#              #
-#    Updated: 2016/11/21 18:36:09 by sly              ###   ########.fr        #
+#    Updated: 2016/12/30 00:58:34 by sly              ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,6 +42,7 @@ minilibxclean:
 
 $(LIBFT_NAME):
 	@make -C $(LIBFT_PATH)
+	@make clean -C $(LIBFT_PATH)
 
 libftclean:
 	@make -C $(LIBFT_PATH) fclean

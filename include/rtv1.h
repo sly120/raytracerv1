@@ -6,7 +6,7 @@
 /*   By: sly <sly@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/21 19:38:43 by sly               #+#    #+#             */
-/*   Updated: 2016/12/16 18:05:54 by sly              ###   ########.fr       */
+/*   Updated: 2016/12/29 01:59:53 by sly              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,11 +111,12 @@ typedef struct			s_param
 	t_vector			upvect;
 	t_vector			leftvect;
 	t_vector			rayvect;
-	t_object			obj;
+	t_object			*obj;
 	t_light				light;
 }						t_param;
 
 void					init(char *arg, t_param *p);
+void					error(int err);
 t_vector				vector_scalar_mult(t_vector vect, double scalar);
 t_vector				vector_vector_add(t_vector v1, t_vector v2);
 t_vector				vector_vector_sub(t_vector v1, t_vector v2);
