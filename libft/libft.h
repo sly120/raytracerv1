@@ -6,7 +6,7 @@
 /*   By: sly <sly@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/03 21:21:41 by sly               #+#    #+#             */
-/*   Updated: 2017/01/02 23:48:01 by sly              ###   ########.fr       */
+/*   Updated: 2017/01/04 00:13:24 by sly              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ char				*ft_strnstr(const char *s1, const char *s2, size_t n);
 int					ft_strcmp(const char *s1, const char *s2);
 int					ft_strncmp(const char *s1, const char *s2, size_t n);
 double				ft_strtod(const char *str, char **end);
-double				ft_strtod2(const char *str, char **end);
+int					ft_strtod2(const char *str, char **end, t_strtod *s);
 int					ft_atoi(const char *str);
 int					ft_isalpha(int c);
 int					ft_isdigit(int c);
