@@ -6,7 +6,7 @@
 /*   By: sly <sly@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/30 00:40:07 by sly               #+#    #+#             */
-/*   Updated: 2017/01/03 23:40:49 by sly              ###   ########.fr       */
+/*   Updated: 2017/01/04 15:51:10 by sly              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,6 +115,6 @@ double			ft_strtod(const char *str, char **end)
 	stripoffblankschecksign(&s);
 	mantisdigitsnblocatepoint(&s);
 	suckupdigits(str, end, &s);
-	ft_strtod2(str, end,  &s);
+	ft_strtod2(end, &s);
 	return(s.fraction);
 }
