@@ -6,7 +6,7 @@
 #    By: sly <sly@student.42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/11/04 17:44:57 by sly               #+#    #+#              #
-#    Updated: 2016/12/30 01:07:23 by sly              ###   ########.fr        #
+#    Updated: 2017/01/08 21:20:55 by sly              ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -72,6 +72,7 @@ SRC =	ft_atoi.c			\
 		ft_strsub.c			\
 		ft_strtrim.c		\
 		ft_strtod.c			\
+		ft_strtod2.c			\
 		ft_tolower.c		\
 		ft_toupper.c
 OBJ = $(SRC:.c=.o)

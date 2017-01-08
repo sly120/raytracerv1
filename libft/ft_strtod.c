@@ -6,7 +6,7 @@
 /*   By: sly <sly@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/30 00:40:07 by sly               #+#    #+#             */
-/*   Updated: 2017/01/04 15:51:10 by sly              ###   ########.fr       */
+/*   Updated: 2017/01/08 21:20:13 by sly              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void			mantisdigitsnblocatepoint(t_strtod *s)
 	}
 }
 
-void			suckupdigits2(const char *str, char **end, t_strtod *s)
+void			suckupdigits2(t_strtod *s)
 {
 	while (s->mantsize > 9)
 	{
@@ -73,14 +73,13 @@ void			suckupdigits2(const char *str, char **end, t_strtod *s)
 		s->frac2 = 10 * s->frac1 + (s->c - '0');
 		s->mantsize -= 1;
 	}
+	s->fraction = (1.0e9 * s->frac1) + s->frac2;
 }
 
-void			suckupdigits(const char *str, char **end, t_strtod *s)
+int			suckupdigits(const char *str, char **end, t_strtod *s)
 {
 	s->pexp = s->p;
 	s->p -= s->mantsize;
-	s->frac1 = 0;
-	s->frac2 = 0;
 	if (s->decpt < 0)
 		s->decpt = s->mantsize;
 	else
@@ -98,23 +97,27 @@ void			suckupdigits(const char *str, char **end, t_strtod *s)
 		s->p = (char*)str;
 		if (end != NULL)
 			*end = (char*)s->p;
+		return (TRUE);
 	}
 	else
-		suckupdigits2(str, end, s);
-	s->fraction = (1.0e9 * s->frac1) + s->frac2;
+		suckupdigits2(s);
+	return (FALSE);
 }
 
 double			ft_strtod(const char *str, char **end)
 {
 	t_strtod	s;
-	double		fraction;
 
 	s.expsign = FALSE;
 	s.exp = 0;
+	s.fracexp = 0;
+	s.frac1 = 0;
+	s.frac2 = 0;
 	s.p = (char*)str;
 	stripoffblankschecksign(&s);
 	mantisdigitsnblocatepoint(&s);
-	suckupdigits(str, end, &s);
+	if (suckupdigits(str, end, &s))
+		return (s.fraction);
 	ft_strtod2(end, &s);
 	return(s.fraction);
 }

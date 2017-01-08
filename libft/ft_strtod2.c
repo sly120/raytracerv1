@@ -6,7 +6,7 @@
 /*   By: sly <sly@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/02 23:56:46 by sly               #+#    #+#             */
-/*   Updated: 2017/01/04 15:50:52 by sly              ###   ########.fr       */
+/*   Updated: 2017/01/08 21:24:46 by sly              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int				skimoffexponent(char **end, t_strtod *s)
 			*end = (end != NULL) ? (char*)s->p : 0;
 			if (s->sign)
 				s->fraction = -s->fraction;
-			return (1);
+			return (TRUE);
 		}
 		while (ft_isdigit((unsigned char)(*s->p)))
 		{
@@ -49,7 +49,7 @@ int				skimoffexponent(char **end, t_strtod *s)
 		}
 	}
 	s->exp = (s->expsign) ? s->fracexp - s->exp : s->fracexp + s->exp;
-	return (0);
+	return (FALSE);
 }
 
 double				*powersof10(void)
@@ -95,17 +95,16 @@ void				generatedoublewithexp(t_strtod *s)
 	}
 	s->fraction = (s->expsign) ? s->fraction / s->dblexp :
 		s->fraction * s->dblexp;
-	free(s->d);
+//	free(s->d);
 }
 
-int					ft_strtod2(char **end, t_strtod *s)
+void				ft_strtod2(char **end, t_strtod *s)
 {
 	if (skimoffexponent(end, s))
-		return (1);
+		return;
 	generatedoublewithexp(s);
 	if (end != NULL)
 		*end = (char*)s->p;
 	if (s->sign)
 		s->fraction = -s->fraction;
-	return (0);
 }

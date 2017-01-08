@@ -6,7 +6,7 @@
 /*   By: sly <sly@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 20:28:59 by sly               #+#    #+#             */
-/*   Updated: 2016/12/30 00:31:10 by sly              ###   ########.fr       */
+/*   Updated: 2017/01/08 20:12:02 by sly              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,7 +138,12 @@ void			create_obj(char *file, t_param *p)
 	printf("ok\n");
 */
 	if (!(ft_strcmp(str, "sphere")))
+	{
 		create_sph(file, p);
+		free(str);
+		str = get_line(file);
+		
+	}
 	else
 		error(6);
 	free(str);

@@ -6,7 +6,7 @@
 /*   By: sly <sly@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/21 19:35:59 by sly               #+#    #+#             */
-/*   Updated: 2016/12/30 01:17:57 by sly              ###   ########.fr       */
+/*   Updated: 2017/01/08 21:25:10 by sly              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static void		mlx_initialization(t_param *p)
 		error(1);
 }
 
-int				main(int argc, char **argv)
+/*int				main(int argc, char **argv)
 {
 	t_param		p;
 
@@ -30,10 +30,35 @@ int				main(int argc, char **argv)
 	{
 		mlx_initialization(&p);
 		init(argv[1], &p);
-		ft_strtod("1", NULL);
 //		raytracing(&p);
 	}
 	else
 		error(2);
+	return (0);
+}*/
+
+#include <sys/errno.h>
+
+int			main(void)
+{
+	const char	*p = "111.11 -22.2 1.18e+4";
+	char		*end;
+	double		f;
+	double		d;
+
+	printf("parsing '%s':\n", p);
+	f = ft_strtod(p, &end);
+	d = strtod(p, &end);
+	while (p != end)
+	{
+		printf("'%.*s' -> ", (int)(end-p), p);
+		p = end;
+		if (errno == ERANGE)
+		{
+			printf("range error, got ");
+			errno = 0;
+		}
+		printf("ft: %f, std: %f\n", f, d);
+	}
 	return (0);
 }
