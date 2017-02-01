@@ -6,7 +6,7 @@
 /*   By: sly <sly@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/02 23:56:46 by sly               #+#    #+#             */
-/*   Updated: 2017/01/08 21:24:46 by sly              ###   ########.fr       */
+/*   Updated: 2017/02/01 16:52:34 by sly              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int				skimoffexponent(char **end, t_strtod *s)
 		if (!ft_isdigit((unsigned char)(*s->p)))
 		{
 			s->p = s->pexp;
-			*end = (end != NULL) ? (char*)s->p : 0;
+		*end = (end != NULL) ? (char*)s->p : NULL;
 			if (s->sign)
 				s->fraction = -s->fraction;
 			return (TRUE);
