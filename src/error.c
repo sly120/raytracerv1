@@ -6,7 +6,7 @@
 /*   By: sly <sly@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/29 01:57:21 by sly               #+#    #+#             */
-/*   Updated: 2016/12/29 02:14:37 by sly              ###   ########.fr       */
+/*   Updated: 2017/02/06 16:16:53 by sly              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ void		error(int err)
 	else if (err == 5)
 		ft_putendl_fd("Error at reading file. Program stopped.", 2);
 	else if (err == 6)
-		ft_putendl_fd("File content error. Program stopped.", 2);
+		ft_putendl_fd(
+				"File content error, no corresponding object. Program stopped."
+				, 2);
 	exit(1);
 }

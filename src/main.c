@@ -6,7 +6,7 @@
 /*   By: sly <sly@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/21 19:35:59 by sly               #+#    #+#             */
-/*   Updated: 2017/01/08 21:25:10 by sly              ###   ########.fr       */
+/*   Updated: 2017/02/01 17:23:15 by sly              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static void		mlx_initialization(t_param *p)
 		error(1);
 }
 
-/*int				main(int argc, char **argv)
+int				main(int argc, char **argv)
 {
 	t_param		p;
 
@@ -35,13 +35,13 @@ static void		mlx_initialization(t_param *p)
 	else
 		error(2);
 	return (0);
-}*/
-
+}
+/*
 #include <sys/errno.h>
 
 int			main(void)
 {
-	const char	*p = "111.11 -22.2 1.18e+4";
+	const char	*p = "123 -4.56 1.18e+4 0 0.1 0.06e9";
 	char		*end;
 	double		f;
 	double		d;
@@ -59,6 +59,8 @@ int			main(void)
 			errno = 0;
 		}
 		printf("ft: %f, std: %f\n", f, d);
+		f = ft_strtod(p, &end);
+		d = strtod(p, &end);
 	}
 	return (0);
-}
+}*/

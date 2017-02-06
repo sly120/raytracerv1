@@ -6,7 +6,7 @@
 /*   By: sly <sly@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 20:28:59 by sly               #+#    #+#             */
-/*   Updated: 2017/01/08 20:12:02 by sly              ###   ########.fr       */
+/*   Updated: 2017/02/06 21:31:54 by sly              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ char			*copy_file(char *file, int size)
 		error(3);
 	if (!(str = (char*)malloc(sizeof(char) * (size + 1))))
 		error(4);
-	if ((read(fd, str, size)) == -1)
+	if ((read(fd, str, size - 1)) == -1)
 		error(5);
 	str[size] = '\0';
 	close(fd);
@@ -78,75 +78,16 @@ int				open_file(char* file)
 		if ((ret = read(fd, &c, 1)) == -1)
 			error(5);
 		if (!(ft_isalnum(c) || c == '\n' || c == '\0' || c == '-' || c == ' ' ||
-					c == '{' || c == '}' || c == ',' || c == '<' || c == '>'))
+					c == '{' || c == '}' || c == '.' || c == '<' || c == '>'))
+		{
+			ft_putchar(c);
 			error(6);
+		}
 		size++;
+//	printf("size: %d, ret:%d\n", size, ret);
 	}
 	close(fd);
 	return (size);
-}
-
-char			*get_line(char *s)
-{
-	static int	end = 0;
-	int			i;
-	int			j;
-	int			len;
-	char		*str;
-
-	i = end;
-	j = 0;
-	while (s[end] != '\n' && s[end] != '\0')
-		end++;
-	len = end - i;
-	if (!(str = (char*)malloc(sizeof(char) * (len + 1))))
-		error(4);
-	if (s[end] == 0)
-	{
-		str[0] = '\0';
-		return (str);
-	}
-	while (j < len)
-		str[j++] = s[i++];
-	str[j] = '\0';
-	if (s[end] == '\n')
-		end++;
-	return (str);
-}
-
-void			create_sph(char *file, t_param *p)
-{
-	char		*str;
-
-	str = get_line(file);
-	ft_putendl(str);
-}
-
-void			create_obj(char *file, t_param *p)
-{
-	char		*str;
-
-	str = get_line(file);
-/*	ft_putendl(str);
-	free(str);
-	while (str[0] != '\0')
-	{
-		str = get_line(file);
-		ft_putendl(str);
-		free(str);
-	}
-	printf("ok\n");
-*/
-	if (!(ft_strcmp(str, "sphere")))
-	{
-		create_sph(file, p);
-		free(str);
-		str = get_line(file);
-		
-	}
-	else
-		error(6);
-	free(str);
 }
 
 void			init(char *arg, t_param *p)
@@ -157,6 +98,7 @@ void			init(char *arg, t_param *p)
 	fsize = open_file(arg);
 	file = copy_file(arg, fsize);
 //	ft_putendl(file);
+//	printf("file read\n");
 	create_obj(file, p);
 	//initvalues(p);
 	free(file);
