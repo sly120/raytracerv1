@@ -6,7 +6,7 @@
 /*   By: sly <sly@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/21 19:38:43 by sly               #+#    #+#             */
-/*   Updated: 2017/02/06 21:33:26 by sly              ###   ########.fr       */
+/*   Updated: 2017/02/09 17:13:46 by sly              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,8 @@ typedef struct			s_sphere
 typedef struct			s_object
 {
 	char				id;
-	char				*name;
-	char				type;
+//	char				*name;
+//	char				type;
 	int					ambient;
 	int					diffuse;
 	int					specular;

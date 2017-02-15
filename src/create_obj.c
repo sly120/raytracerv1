@@ -6,7 +6,7 @@
 /*   By: sly <sly@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/06 17:44:51 by sly               #+#    #+#             */
-/*   Updated: 2017/02/06 21:50:12 by sly              ###   ########.fr       */
+/*   Updated: 2017/02/15 22:51:19 by sly              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,22 +21,61 @@ void			create_sph(char *file, char **str, t_param *p)
 	*str = get_line(file);
 	ft_putendl(*str);
 	sph_data = ft_strsplit(*str, ' ');
-//	free(*str);
+	free(*str);
 }
 
-void			init_obj(void)
+void			init_obj(t_object *obj)
 {
-	t_object	*o;
+	obj->ambient = 0;
+	obj->diffuse = 0;
+	obj->specular = 0;
+	obj->selfillum = 0;
+	obj->shininess = 0;
+	obj->shinestrength = 0;
+	obj->transmittivity = 0;
+	obj->reflectivity = 0;
+	obj->permanent = 0;
+	obj->t = 0;
+	obj->next = NULL;
+}
+
+void			add_obj(t_param *p, int i)
+{
+	t_object	*obj;
+	t_object	*cursor;
+	char		id;
+
+	if (!(obj = (t_object*)malloc(sizeof(t_object))))
+		exit(4);
+	init_obj(obj);
+	cursor = p->obj;
+	id = 0;
+	if (cursor == NULL)
+	{
+		obj->id = 0;
+		cursor = obj;
+	}
+	else
+	{
+		while (cursor->next != NULL)
+		{
+			cursor = cursor->next;
+			id++;
+		}
+		obj->id = id;
+		cursor->next = obj;
+	}
 }
 
 void			create_obj(char *file, t_param *p)
 {
 	char		*str;
-	t_object	*o;
 
-	init_obj();
-	str = get_line(file);
-	ft_putendl(str);
+	p->obj = NULL;
+	while (ft_strcmp(str, ""))
+	{
+		str = get_line(file);
+//	ft_putendl(str);
 /*	free(str);
 	while (str[0] != '\0')
 	{
@@ -45,14 +84,19 @@ void			create_obj(char *file, t_param *p)
 		free(str);
 	}
 */
-	if (!(ft_strcmp(str, "sphere")))
-	{
-		create_sph(file, &str, p);
+		if (!(ft_strcmp(str, "sphere")))
+		{
+			add_obj(p, 0);
+			create_sph(file, &str, p);
 //		str = get_line(file);
 //		ft_putendl(str);
+		}
+		str = get_line(file);
+		if (!(ft_strcmp(str, "\n")))
+		{
+			free(str);
+			str = get_line(file);
+		}
 	}
-	else
-		error(6);
-	free(str);
+	printf("fin\n");
 }
-
