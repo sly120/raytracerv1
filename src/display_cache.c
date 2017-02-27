@@ -6,13 +6,13 @@
 /*   By: sly <sly@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/06 22:57:41 by sly               #+#    #+#             */
-/*   Updated: 2017/02/18 19:24:01 by sly              ###   ########.fr       */
+/*   Updated: 2017/02/27 20:28:43 by sly              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <rtv1.h>
 
-void			display_cache(int firstobjid, t_param *p)
+void			display_cache(t_param *p)
 {
 	int			color;
 	t_vector	pos;

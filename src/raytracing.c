@@ -6,7 +6,7 @@
 /*   By: sly <sly@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 20:47:09 by sly               #+#    #+#             */
-/*   Updated: 2017/02/18 19:22:41 by sly              ###   ########.fr       */
+/*   Updated: 2017/02/27 20:28:51 by sly              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,19 +47,8 @@ static void		sphere_calc(t_param *p)
 
 static void		raytracing_part2(t_param *p)
 {
-	double		d;
-	int			firstobjid;
-
-	firstobjid = -1;
-	d = DBL_MAX;
 	sphere_calc(p);
-	if (p->obj->t != -1 && d > p->obj->t)
-	{
-		d = p->obj->t;
-		firstobjid = p->obj->id;
-	}
-	if (firstobjid > -1)
-		display_cache(firstobjid, p);
+	display_cache(p);
 }
 
 void			raytracing(t_param *p)

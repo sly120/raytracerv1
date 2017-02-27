@@ -6,7 +6,7 @@
 /*   By: sly <sly@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/21 19:35:59 by sly               #+#    #+#             */
-/*   Updated: 2017/02/18 18:59:02 by sly              ###   ########.fr       */
+/*   Updated: 2017/02/18 20:05:06 by sly              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static void		mlx_initialization(t_param *p)
 {
 	p->mlx = mlx_init();
-	p->win = mlx_new_window(p->mlx, MAX_X, MAX_Y, "Wolf3D");
+	p->win = mlx_new_window(p->mlx, MAX_X, MAX_Y, "rtv1");
 	p->img = mlx_new_image(p->mlx, MAX_X, MAX_Y);
 	p->imgad = mlx_get_data_addr(p->img, &p->bpp, &p->sl, &p->endian);
 	if (p->bpp != 32 || p->endian != 0)

@@ -6,7 +6,7 @@
 /*   By: sly <sly@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/21 19:38:43 by sly               #+#    #+#             */
-/*   Updated: 2017/02/18 19:21:26 by sly              ###   ########.fr       */
+/*   Updated: 2017/02/27 20:28:40 by sly              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,7 +125,7 @@ t_vector				vector_vector_sub(t_vector v1, t_vector v2);
 void					raytracing(t_param *p);
 t_vector				normalize_vect(t_vector vect);
 int						light_calc(t_vector pos, t_param *p);
-void					display_cache(int firstobjid, t_param *p);
+void					display_cache(t_param *p);
 void					hook(t_param *p);
 int						key_event(int key, t_param *p);
 int						quit_program(t_param *p);
