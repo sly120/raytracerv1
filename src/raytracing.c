@@ -6,7 +6,7 @@
 /*   By: sly <sly@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 20:47:09 by sly               #+#    #+#             */
-/*   Updated: 2017/02/27 20:28:51 by sly              ###   ########.fr       */
+/*   Updated: 2017/05/09 20:41:51 by sly              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,8 @@ static void		sphere_calc(t_param *p)
 		p->obj->sph.t1 = -p->obj->sph.b / 2 / p->obj->sph.a - sqrt(p->obj->sph.det) / 2 / p->obj->sph.a;
 		p->obj->sph.t2 = -p->obj->sph.b / 2 / p->obj->sph.a + sqrt(p->obj->sph.det) / 2 / p->obj->sph.a;
 		p->obj->t = (p->obj->sph.t1 <= p->obj->sph.t2) ? p->obj->sph.t1 : p->obj->sph.t2;
-//		if (p->obj.sph.t >= 0)
-//			printf("x: %d, y:%d, det: %f, t: %f, t1: %f, t2: %f, a: %f, b: %f, c: %f\n", p->x, p->y, p->obj.sph.det, p->obj.sph.t, p->obj.sph.t1, p->obj.sph.t2, p->obj.sph.a, p->obj.sph.b, p->obj.sph.c);
+//		if (p->obj->t >= 0)
+//			printf("x: %d, y:%d, det: %f, t: %f, t1: %f, t2: %f, a: %f, b: %f, c: %f\n", p->x, p->y, p->obj->sph.det, p->obj->t, p->obj->sph.t1, p->obj->sph.t2, p->obj->sph.a, p->obj->sph.b, p->obj->sph.c);
 	}
 	else
 		p->obj->t = -1;
@@ -47,7 +47,9 @@ static void		sphere_calc(t_param *p)
 
 static void		raytracing_part2(t_param *p)
 {
-	sphere_calc(p);
+//	printf("type: %d\n", p->obj->type);
+	if (p->obj->type == SPHERE)
+		sphere_calc(p);
 	display_cache(p);
 }
 

@@ -6,13 +6,13 @@
 /*   By: sly <sly@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 20:28:59 by sly               #+#    #+#             */
-/*   Updated: 2017/02/06 21:31:54 by sly              ###   ########.fr       */
+/*   Updated: 2017/05/09 20:50:08 by sly              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <rtv1.h>
 
-/*static void		initvalues(t_param *p)
+static void		initvalues(t_param *p)
 {
 	p->screen.width = 0.5;
 	p->screen.height = 0.5;
@@ -31,20 +31,20 @@
 	p->leftvect.z = 0;
 	p->x = 0;
 	p->y = 0;
-	p->obj.id = 0;
-	p->obj.sph.pos.x = 0;
-	p->obj.sph.pos.y = 0;
-	p->obj.sph.pos.z = 0;
-	p->obj.sph.radius = 2;
-	p->obj.ambient = 0x000000FF;
-	p->obj.diffuse = 0x0000FF00;
+	p->obj->id = 0;
+//	p->obj.sph.pos.x = 0;
+//	p->obj.sph.pos.y = 0;
+//	p->obj.sph.pos.z = 0;
+//	p->obj->sph.radius = 2;
+//	p->obj->ambient = 0x000000FF;
+//	p->obj->diffuse = 0x0000FF00;
 	p->light.pos.x = -20;
 	p->light.pos.y = 20;
 	p->light.pos.z = 20;
 	p->light.selfillum = 1;
 	p->light.color = 0x00FFFFFF;
 
-}*/
+}
 
 char			*copy_file(char *file, int size)
 {
@@ -100,6 +100,6 @@ void			init(char *arg, t_param *p)
 //	ft_putendl(file);
 //	printf("file read\n");
 	create_obj(file, p);
-	//initvalues(p);
+	initvalues(p);
 	free(file);
 }

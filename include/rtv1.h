@@ -6,7 +6,7 @@
 /*   By: sly <sly@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/21 19:38:43 by sly               #+#    #+#             */
-/*   Updated: 2017/02/27 20:28:40 by sly              ###   ########.fr       */
+/*   Updated: 2017/05/09 20:36:44 by sly              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@
 #define KEY_ESC 53
 #define KEY_SPACE 49
 #define KEY_ENTER 36
+
+#define SPHERE 700
 
 typedef struct			s_screen
 {
@@ -61,9 +63,9 @@ typedef struct			s_sphere
 
 typedef struct			s_object
 {
-	char				id;
+	int					id;
 //	char				*name;
-//	char				type;
+	int					type;
 	int					ambient;
 	int					diffuse;
 	int					specular;

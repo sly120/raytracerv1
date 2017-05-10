@@ -6,7 +6,7 @@
 /*   By: sly <sly@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/06 17:44:51 by sly               #+#    #+#             */
-/*   Updated: 2017/02/18 18:21:19 by sly              ###   ########.fr       */
+/*   Updated: 2017/05/10 19:40:44 by sly              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,30 @@
 void			create_sph(char *file, char **str, t_param *p)
 {
 	char		**sph_data;
+	char		*endptr;
 
-	printf("create_sph\n");
+//	printf("create_sph\n");
 	free(*str);
 	*str = get_line(file);
-	ft_putendl(*str);
-	sph_data = ft_strsplit(*str, ' ');
+//	ft_putendl(*str);
+	p->obj->sph.pos.x = ft_strtod(*str, &endptr);
+	p->obj->sph.pos.y = ft_strtod(endptr, &endptr);
+	p->obj->sph.pos.z = ft_strtod(endptr, &endptr);
+	p->obj->sph.radius = ft_strtod(endptr, NULL);
 	free(*str);
+	*str = get_line(file);
+	p->obj->ambient = ft_strtod(*str, NULL); //0x000000FF;
+	free(*str);
+	*str = get_line(file);
+	p->obj->diffuse = ft_strtod(*str, NULL);//0x0000FF00;
+	printf("sphere x : %f, y : %f, z : %f, radius: %f, ambient: %d, diffuse: %d\n", p->obj->sph.pos.x, p->obj->sph.pos.y, p->obj->sph.pos.z, p->obj->sph.radius, p->obj->ambient, p->obj->diffuse);
+	free(*str);
+	p->obj->type = SPHERE;
 }
 
 void			init_obj(t_object *obj)
 {
+	obj->type = SPHERE;
 	obj->ambient = 0;
 	obj->diffuse = 0;
 	obj->specular = 0;
@@ -41,36 +54,27 @@ void			init_obj(t_object *obj)
 
 void			add_obj(t_param *p, int i)
 {
-	t_object	*obj;
-	t_object	*cursor;
-	char		id;
+	t_object	*new_obj;
+	t_object	**obj_addr;
 
-	if (!(obj = (t_object*)malloc(sizeof(t_object))))
+	if (!(new_obj = (t_object*)malloc(sizeof(t_object))))
 		exit(4);
-	init_obj(obj);
-	cursor = p->obj;
-	id = 0;
-	if (cursor == NULL)
-	{
-		obj->id = 0;
-		cursor = obj;
-	}
-	else
-	{
-		while (cursor->next != NULL)
-		{
-			cursor = cursor->next;
-			id++;
-		}
-		obj->id = id;
-		cursor->next = obj;
-	}
+	init_obj(new_obj);
+//	printf("obj ambient : %d\n", obj->ambient);
+	obj_addr = &p->obj;
+	new_obj->id = i;
+//	printf("cursor : %p\n", cursor);
+	while (*obj_addr)
+		obj_addr = &(*obj_addr)->next;
+	*obj_addr = new_obj;
 }
 
 void			create_obj(char *file, t_param *p)
 {
 	char		*str;
+	int			count;
 
+	count = 0;
 	p->obj = NULL;
 	while (ft_strcmp(str, ""))
 	{
@@ -86,8 +90,9 @@ void			create_obj(char *file, t_param *p)
 */
 		if (!(ft_strcmp(str, "sphere")))
 		{
-			add_obj(p, 0);
+			add_obj(p, count++);
 			create_sph(file, &str, p);
+//			printf("obj : %p, sph : %d\n", p->obj, p->obj->type);
 //		str = get_line(file);
 //		ft_putendl(str);
 		}
@@ -98,5 +103,5 @@ void			create_obj(char *file, t_param *p)
 			str = get_line(file);
 		}
 	}
-	printf("fin\n");
+//	printf("fin\n");
 }
