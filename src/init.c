@@ -6,7 +6,7 @@
 /*   By: sly <sly@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 20:28:59 by sly               #+#    #+#             */
-/*   Updated: 2017/05/09 20:50:08 by sly              ###   ########.fr       */
+/*   Updated: 2017/05/12 18:39:58 by sly              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,11 @@ static void		initvalues(t_param *p)
 //	p->obj->sph.radius = 2;
 //	p->obj->ambient = 0x000000FF;
 //	p->obj->diffuse = 0x0000FF00;
-	p->light.pos.x = -20;
-	p->light.pos.y = 20;
-	p->light.pos.z = 20;
-	p->light.selfillum = 1;
-	p->light.color = 0x00FFFFFF;
+//	p->light.pos.x = -20;
+//	p->light.pos.y = 20;
+//	p->light.pos.z = 20;
+//	p->light.selfillum = 1;
+//	p->light.color = 0x00FFFFFF;
 
 }
 

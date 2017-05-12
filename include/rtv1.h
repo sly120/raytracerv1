@@ -6,7 +6,7 @@
 /*   By: sly <sly@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/21 19:38:43 by sly               #+#    #+#             */
-/*   Updated: 2017/05/09 20:36:44 by sly              ###   ########.fr       */
+/*   Updated: 2017/05/12 21:38:08 by sly              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,8 @@
 #define KEY_SPACE 49
 #define KEY_ENTER 36
 
-#define SPHERE 700
+#define LIGHT 700
+#define SPHERE 701
 
 typedef struct			s_screen
 {
@@ -61,6 +62,12 @@ typedef struct			s_sphere
 	double				t2;
 }						t_sphere;
 
+typedef struct			s_light
+{
+	char				positional;
+	t_vector			pos;
+}						t_light;
+
 typedef struct			s_object
 {
 	int					id;
@@ -77,16 +84,9 @@ typedef struct			s_object
 	char				permanent;
 	double				t;
 	t_sphere			sph;
+	t_light				light;
 	struct s_object		*next;
 }						t_object;
-
-typedef struct			s_light
-{
-	char				id;
-	double				selfillum;
-	int					color;
-	t_vector			pos;
-}						t_light;
 
 typedef struct			s_color
 {
@@ -114,7 +114,7 @@ typedef struct			s_param
 	t_vector			leftvect;
 	t_vector			rayvect;
 	t_object			*obj;
-	t_light				light;
+//	t_light				light;
 }						t_param;
 
 void					error(int err);

@@ -6,7 +6,7 @@
 /*   By: sly <sly@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/06 17:44:51 by sly               #+#    #+#             */
-/*   Updated: 2017/05/10 19:40:44 by sly              ###   ########.fr       */
+/*   Updated: 2017/05/12 21:48:24 by sly              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 void			create_sph(char *file, char **str, t_param *p)
 {
-	char		**sph_data;
 	char		*endptr;
 
 //	printf("create_sph\n");
@@ -31,14 +30,39 @@ void			create_sph(char *file, char **str, t_param *p)
 	free(*str);
 	*str = get_line(file);
 	p->obj->diffuse = ft_strtod(*str, NULL);//0x0000FF00;
-	printf("sphere x : %f, y : %f, z : %f, radius: %f, ambient: %d, diffuse: %d\n", p->obj->sph.pos.x, p->obj->sph.pos.y, p->obj->sph.pos.z, p->obj->sph.radius, p->obj->ambient, p->obj->diffuse);
+//	printf("sphere x : %f, y : %f, z : %f, radius: %f, ambient: %d, diffuse: %d\n", p->obj->sph.pos.x, p->obj->sph.pos.y, p->obj->sph.pos.z, p->obj->sph.radius, p->obj->ambient, p->obj->diffuse);
 	free(*str);
 	p->obj->type = SPHERE;
 }
 
+void			create_light(char *file, char **str, t_param *p)
+{
+	char		*endptr;
+
+//	printf("create_sph\n");
+	free(*str);
+	*str = get_line(file);
+//	ft_putendl(*str);
+	p->obj->light.pos.x = ft_strtod(*str, &endptr);
+	p->obj->light.pos.y = ft_strtod(endptr, &endptr);
+	p->obj->light.pos.z = ft_strtod(endptr, &endptr);
+	p->obj->light.positional = ft_strtod(endptr, NULL);
+	free(*str);
+	*str = get_line(file);
+	p->obj->ambient = ft_strtod(*str, NULL);
+	free(*str);
+	*str = get_line(file);
+	p->obj->diffuse = ft_strtod(*str, NULL);
+	free(*str);
+	*str = get_line(file);
+	p->obj->specular = ft_strtod(*str, NULL);
+	free(*str);
+	printf("light x : %f, y : %f, z : %f, ambient : %d, diffuse : %d, specular : %d\n", p->obj->light.pos.x, p->obj->light.pos.y, p->obj->light.pos.z, p->obj->ambient, p->obj->diffuse, p->obj->specular);
+	p->obj->type = LIGHT;
+}
+
 void			init_obj(t_object *obj)
 {
-	obj->type = SPHERE;
 	obj->ambient = 0;
 	obj->diffuse = 0;
 	obj->specular = 0;
@@ -95,6 +119,11 @@ void			create_obj(char *file, t_param *p)
 //			printf("obj : %p, sph : %d\n", p->obj, p->obj->type);
 //		str = get_line(file);
 //		ft_putendl(str);
+		}
+		else if (!(ft_strcmp(str, "light")))
+		{
+			add_obj(p, count++);
+			create_light(file, &str, p);
 		}
 		str = get_line(file);
 		if (!(ft_strcmp(str, "\n")))
